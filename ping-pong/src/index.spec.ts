@@ -75,3 +75,8 @@ test("score should return a pair of scores when an ace is present", () => {
 test("score should return a single score when there's an ace but the rest of the cards sum to greater than 10", () => {
   expect(score([Card.Three, Card.Queen, Card.Ace])).toEqual(14);
 });
+
+test("deal should add a card to a hand when the current score of the hand is less than 21", () => {
+  const currentHand = [Card.Eight]
+  expect(deal(currentHand)).toHaveLength(2)
+})
