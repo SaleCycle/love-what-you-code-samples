@@ -145,6 +145,15 @@ test("deal should add a card to a hand from the deck when the current score of t
   });
 });
 
+test("an empty deck should return the hand and deck unchanged", () => {
+  const hand = [Card.Eight, Card.Ace];
+  const deck: Card[] = [];
+  expect(deal(hand, deck)).toEqual({
+    hand: [Card.Eight, Card.Ace],
+    deck: []
+  });
+});
+
 test("doesPlayerWin should compare two hands and decide which wins", () => {
   const dealerHand = [Card.Eight, Card.King];
   const playerHand = [Card.King, Card.Queen];
