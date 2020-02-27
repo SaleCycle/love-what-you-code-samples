@@ -61,7 +61,10 @@ interface AceScore {
   highAce: number;
 }
 
-function scoreConsideringAce(hand: Card[], aceHandler: (aceScore: AceScore) => number): number {
+function scoreConsideringAce(
+  hand: Card[],
+  aceHandler: (aceScore: AceScore) => number
+): number {
   const handScore = score(hand);
   return isAce(handScore) ? aceHandler(handScore) : handScore;
 }
@@ -71,7 +74,7 @@ function isAce(handScore: number | AceScore): handScore is AceScore {
 }
 
 function deal(hand: Card[], deck: Card[]) {
-  return scoreConsideringAce(hand, x => x.lowAce) < 21
+  return scoreConsideringAce(hand, x => x.lowAce) < 21 && deck.length > 0
     ? {
         hand: hand.concat(deck[0]),
         deck: deck.slice(1)
