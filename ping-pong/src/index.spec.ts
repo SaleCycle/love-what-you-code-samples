@@ -56,8 +56,18 @@ function score(cards: Card[]) {
     : sum;
 }
 
+function isAce(
+  handScore: number | { lowAce: number }
+): handScore is { lowAce: number } {
+  return (handScore as { lowAce: number }).lowAce !== undefined;
+}
+
 function deal(hand: Card[], deck: Card[]) {
-  return score(hand) < 21
+  const handScore = score(hand);
+
+  const scoreConsideringAce = isAce(handScore) ? handScore.lowAce : handScore;
+
+  return scoreConsideringAce < 21
     ? {
         hand: hand.concat(deck[0]),
         deck: deck.slice(1)
