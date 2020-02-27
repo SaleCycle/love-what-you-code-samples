@@ -56,10 +56,12 @@ function score(cards: Card[]) {
     : sum;
 }
 
-function isAce(
-  handScore: number | { lowAce: number }
-): handScore is { lowAce: number } {
-  return (handScore as { lowAce: number }).lowAce !== undefined;
+interface AceScore {
+  lowAce: number;
+}
+
+function isAce(handScore: number | AceScore): handScore is AceScore {
+  return (handScore as AceScore).lowAce !== undefined;
 }
 
 function deal(hand: Card[], deck: Card[]) {
