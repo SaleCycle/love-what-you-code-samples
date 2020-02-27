@@ -18,3 +18,10 @@ test("score should return the total score of the cards", () => {
 test("score should count picture cards as 10", () => {
   expect(score([3, picture.Queen, picture.King])).toEqual(23);
 });
+
+test("score should return a pair of scores when an ace is present", () => {
+  expect(score([3, Ace])).toEqual({
+    lowAce: 4,
+    highAce: 13
+  });
+});
