@@ -61,15 +61,17 @@ interface AceScore {
   highAce: number;
 }
 
+function foo(hand: Card[], aceHandler: (aceScore: AceScore) => number): number {
+  const handScore = score(hand);
+  return isAce(handScore) ? aceHandler(handScore) : handScore;
+}
+
 function isAce(handScore: number | AceScore): handScore is AceScore {
   return (handScore as AceScore).lowAce !== undefined;
 }
 
 function deal(hand: Card[], deck: Card[]) {
-  const handScore = score(hand);
-  const scoreConsideringAce = isAce(handScore) ? handScore.lowAce : handScore;
-
-  return scoreConsideringAce < 21
+  return foo(hand, x => x.lowAce) < 21
     ? {
         hand: hand.concat(deck[0]),
         deck: deck.slice(1)
@@ -81,17 +83,10 @@ function deal(hand: Card[], deck: Card[]) {
 }
 
 function doesPlayerWin(dealersCards: Card[], playersCards: Card[]) {
-  const playersScore = score(playersCards);
-  const dealersScore = score(dealersCards);
-  const dealersScoreConsideringAce = isAce(dealersScore)
-    ? dealersScore.highAce
-    : dealersScore;
-  const playersScoreConsideringAce = isAce(playersScore)
-    ? playersScore.highAce
-    : playersScore;
-
-  console.log(playersScoreConsideringAce, dealersScoreConsideringAce);
-  return playersScoreConsideringAce > dealersScoreConsideringAce;
+  const playersScore = foo(playersCards, x => x.highAce);
+  const dealersScore = foo(dealersCards, x => x.highAce);
+  
+  return playersScore > dealersScore;
 }
 
 test("score should return the total score of the cards", () => {
