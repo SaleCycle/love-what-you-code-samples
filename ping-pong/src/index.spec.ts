@@ -91,3 +91,12 @@ test("deal should add a card to a hand from the deck when the current score of t
     deck: []
   });
 });
+
+test("deal should return the hand and deck unchanged when the score of the hand is 21 or greater", () => {
+  const hand = [Card.Eight, Card.Eight, Card.King];
+  const deck = [Card.Five];
+  expect(deal(hand, deck)).toEqual({
+    hand,
+    deck
+  });
+});
