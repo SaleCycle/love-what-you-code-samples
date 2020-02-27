@@ -135,3 +135,9 @@ test("deal should add a card to a hand from the deck when the current score of t
     deck: []
   });
 });
+
+test("doesPlayerWin should compare two hands and decide which wins", () => {
+  const dealerHand = [Card.Eight, Card.King];
+  const playerHand = [Card.King, Card.Queen];
+  expect(doesPlayerWin(dealerHand, playerHand)).toEqual(true)
+})
