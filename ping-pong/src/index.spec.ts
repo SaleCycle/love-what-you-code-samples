@@ -83,12 +83,6 @@ test("score should return a single score when there's an ace but the rest of the
   expect(score([Card.Three, Card.Queen, Card.Ace])).toEqual(14);
 });
 
-test("deal should add a card to a hand when the current score of the hand is less than 21", () => {
-  const currentHand = [Card.Eight];
-  const deck = [Card.Five];
-  expect(deal(currentHand, deck).hand).toHaveLength(2);
-});
-
 test("deal should add a card to a hand from the deck when the current score of the hand is less than 21", () => {
   const currentHand = [Card.Eight];
   const deck = [Card.Five];
