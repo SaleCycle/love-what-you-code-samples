@@ -56,8 +56,11 @@ function score(cards: Card[]) {
     : sum;
 }
 
-function deal(cards: Card[]) {
-  return cards.concat([Card.Eight]);
+function deal(cards: Card[], deck: Card[]) {
+  return {
+    hand: cards.concat(deck[0]),
+    deck: deck.slice(1)
+  };
 }
 
 test("score should return the total score of the cards", () => {
@@ -82,7 +85,8 @@ test("score should return a single score when there's an ace but the rest of the
 
 test("deal should add a card to a hand when the current score of the hand is less than 21", () => {
   const currentHand = [Card.Eight];
-  expect(deal(currentHand)).toHaveLength(2);
+  const deck = [Card.Five];
+  expect(deal(currentHand, deck).hand).toHaveLength(2);
 });
 
 test("deal should add a card to a hand from the deck when the current score of the hand is less than 21", () => {
