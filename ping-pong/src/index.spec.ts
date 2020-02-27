@@ -56,6 +56,10 @@ function score(cards: Card[]) {
     : sum;
 }
 
+function deal(cards: Card[]) {
+  return cards.concat([Card.Eight]);
+}
+
 test("score should return the total score of the cards", () => {
   expect(score([Card.Two, Card.Four])).toEqual(6);
   expect(score([Card.Three, Card.Four, Card.Five])).toEqual(12);
