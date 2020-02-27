@@ -8,12 +8,12 @@ type Card = number | picture;
 
 function score(numbers: Card[]) {
   const sum = numbers.reduce((acc, next) => acc + next, 0);
-  return numbers.find(x => x === picture.Ace) === undefined
-    ? sum
-    : {
+  return numbers.find(x => x === picture.Ace)
+    ? {
         lowAce: sum,
         highAce: sum + 9
-      };
+      }
+    : sum;
 }
 
 test("score should return the total score of the cards", () => {
