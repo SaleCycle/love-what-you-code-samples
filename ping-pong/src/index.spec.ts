@@ -31,3 +31,7 @@ test("score should return a pair of scores when an ace is present", () => {
     highAce: 13
   });
 });
+
+test("score should return a single score when there's an ace but the rest of the cards sum to greater than 10", () => {
+  expect(score([3, picture.Queen, picture.Ace])).toEqual(14);
+});
