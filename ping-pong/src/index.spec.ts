@@ -1,5 +1,5 @@
 function score(numbers: number[]) {
-  return 6;
+  return numbers.reduce((acc, next) => acc + next, 0);
 }
 
 test("score should return the total score of the cards", () => {
