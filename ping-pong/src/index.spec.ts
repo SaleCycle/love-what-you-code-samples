@@ -45,10 +45,10 @@ function value(card: Card): number {
   }
 }
 
-function score(numbers: Card[]) {
-  const sum = numbers.reduce((acc, next) => acc + value(next), 0);
+function score(cards: Card[]) {
+  const sum = cards.reduce((acc, next) => acc + value(next), 0);
 
-  return numbers.find(x => x === Card.Ace) && sum < 10
+  return cards.find(x => x === Card.Ace) && sum < 10
     ? {
         lowAce: sum,
         highAce: sum + 9
@@ -77,6 +77,6 @@ test("score should return a single score when there's an ace but the rest of the
 });
 
 test("deal should add a card to a hand when the current score of the hand is less than 21", () => {
-  const currentHand = [Card.Eight]
-  expect(deal(currentHand)).toHaveLength(2)
-})
+  const currentHand = [Card.Eight];
+  expect(deal(currentHand)).toHaveLength(2);
+});
