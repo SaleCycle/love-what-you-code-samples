@@ -84,3 +84,12 @@ test("deal should add a card to a hand when the current score of the hand is les
   const currentHand = [Card.Eight];
   expect(deal(currentHand)).toHaveLength(2);
 });
+
+test("deal should add a card to a hand from the deck when the current score of the hand is less than 21", () => {
+  const currentHand = [Card.Eight];
+  const deck = [Card.Five];
+  expect(deal(currentHand, deck)).toEqual({
+    hand: [Card.Eight, Card.Five],
+    deck: []
+  });
+});
