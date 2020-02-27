@@ -86,7 +86,7 @@ function doesPlayerWin(dealersCards: Card[], playersCards: Card[]) {
   const playersScore = foo(playersCards, x => x.highAce);
   const dealersScore = foo(dealersCards, x => x.highAce);
 
-  return playersScore > dealersScore;
+  return playersScore > dealersScore && playersScore <= 21;
 }
 
 test("score should return the total score of the cards", () => {
