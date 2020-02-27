@@ -56,11 +56,16 @@ function score(cards: Card[]) {
     : sum;
 }
 
-function deal(cards: Card[], deck: Card[]) {
-  return {
-    hand: cards.concat(deck[0]),
-    deck: deck.slice(1)
-  };
+function deal(hand: Card[], deck: Card[]) {
+  return score(hand) < 21
+    ? {
+        hand: hand.concat(deck[0]),
+        deck: deck.slice(1)
+      }
+    : {
+        hand,
+        deck
+      };
 }
 
 test("score should return the total score of the cards", () => {
