@@ -8,6 +8,11 @@ type Card = number | picture;
 
 function score(numbers: Card[]) {
   const sum = numbers.reduce((acc, next) => acc + next, 0);
+
+  if (sum > 10) {
+    return sum;
+  }
+
   return numbers.find(x => x === picture.Ace)
     ? {
         lowAce: sum,
