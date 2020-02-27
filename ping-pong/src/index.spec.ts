@@ -105,3 +105,21 @@ test("deal should return the hand and deck unchanged when the score of the hand 
     deck
   });
 });
+
+test("deal should add a card to a hand from the deck when the current score of the hand is between 10 and 21 and it contains an ace", () => {
+  const hand = [Card.Eight, Card.King, Card.Ace];
+  const deck = [Card.Five];
+  expect(deal(hand, deck)).toEqual({
+    hand: [Card.Eight, Card.King, Card.Ace, Card.Five],
+    deck: []
+  });
+});
+
+test("deal should add a card to a hand from the deck when the current score of the hand is less than 11 and it contains an ace", () => {
+  const hand = [Card.Eight, Card.Ace];
+  const deck = [Card.Five];
+  expect(deal(hand, deck)).toEqual({
+    hand: [Card.Eight, Card.Ace, Card.Five],
+    deck: []
+  });
+});
