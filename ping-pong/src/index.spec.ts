@@ -85,7 +85,7 @@ function deal(hand: Card[], deck: Card[]) {
 function doesPlayerWin(dealersCards: Card[], playersCards: Card[]) {
   const playersScore = foo(playersCards, x => x.highAce);
   const dealersScore = foo(dealersCards, x => x.highAce);
-  
+
   return playersScore > dealersScore;
 }
 
@@ -149,4 +149,10 @@ test("doesPlayerWin should compare two hands and decide which wins", () => {
   const dealerHand = [Card.Eight, Card.King];
   const playerHand = [Card.King, Card.Queen];
   expect(doesPlayerWin(dealerHand, playerHand)).toEqual(true);
+});
+
+test("doesPlayerWin should be false if the player is bust", () => {
+  const dealerHand = [Card.King, Card.Queen];
+  const playerHand = [Card.Eight, Card.King, Card.Eight];
+  expect(doesPlayerWin(dealerHand, playerHand)).toEqual(false);
 });
