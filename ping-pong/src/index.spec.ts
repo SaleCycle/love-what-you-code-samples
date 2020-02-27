@@ -58,6 +58,7 @@ function score(cards: Card[]) {
 
 interface AceScore {
   lowAce: number;
+  highAce: number;
 }
 
 function isAce(handScore: number | AceScore): handScore is AceScore {
@@ -66,7 +67,6 @@ function isAce(handScore: number | AceScore): handScore is AceScore {
 
 function deal(hand: Card[], deck: Card[]) {
   const handScore = score(hand);
-
   const scoreConsideringAce = isAce(handScore) ? handScore.lowAce : handScore;
 
   return scoreConsideringAce < 21
@@ -78,6 +78,20 @@ function deal(hand: Card[], deck: Card[]) {
         hand,
         deck
       };
+}
+
+function doesPlayerWin(dealersCards: Card[], playersCards: Card[]) {
+  const playersScore = score(playersCards);
+  const dealersScore = score(dealersCards);
+  const dealersScoreConsideringAce = isAce(dealersScore)
+    ? dealersScore.highAce
+    : dealersScore;
+  const playersScoreConsideringAce = isAce(playersScore)
+    ? playersScore.highAce
+    : playersScore;
+
+  console.log(playersScoreConsideringAce, dealersScoreConsideringAce);
+  return playersScoreConsideringAce > dealersScoreConsideringAce;
 }
 
 test("score should return the total score of the cards", () => {
@@ -139,5 +153,5 @@ test("deal should add a card to a hand from the deck when the current score of t
 test("doesPlayerWin should compare two hands and decide which wins", () => {
   const dealerHand = [Card.Eight, Card.King];
   const playerHand = [Card.King, Card.Queen];
-  expect(doesPlayerWin(dealerHand, playerHand)).toEqual(true)
-})
+  expect(doesPlayerWin(dealerHand, playerHand)).toEqual(true);
+});
