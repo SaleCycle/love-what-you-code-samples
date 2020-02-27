@@ -1,5 +1,3 @@
-import { score } from "./index";
-
 test("a test", () => {
-  expect(score()).toEqual(0);
+  expect(score([2, 4])).toEqual(6);
 });
